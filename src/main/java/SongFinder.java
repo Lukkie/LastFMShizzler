@@ -1,10 +1,7 @@
 import de.umass.lastfm.*;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Lukas on 05-Apr-16.
@@ -39,10 +36,14 @@ public class SongFinder {
         //Chart<Track> tracks = User.getWeeklyTrackChart(user, ""+from, ""+to, 200, key);
         //Collection<Track> allTracks = tracks.getEntries();
         ArrayList<Song> songs = new ArrayList<Song>();
+        HashSet<String> collectedSongs = new HashSet<String>();
         System.out.println(allTracks.size() +" tracks found.");
         for (Track t : allTracks) {
-            System.out.printf("\"%s\" by %s\n",t.getName(), t.getArtist());
-            songs.add(new Song(t.getName(), t.getArtist()));
+            if (!collectedSongs.contains(t.getName())) {
+                System.out.printf("\"%s\" by %s\n", t.getName(), t.getArtist());
+                songs.add(new Song(t.getName(), t.getArtist()));
+                collectedSongs.add(t.getName());
+            }
         }
 
         return songs;

@@ -31,7 +31,7 @@ public class SpotifyPlaylistCreator {
     private final static String spotifyRedirectURI = "http://lukkietestshizzle.com/callback/";
 
     private final static long from = 1429280607L; // Fri Apr 17 16:23:27 CEST 2015 (in seconden)
-    private final static int duration = 180; // in minuten
+    private final static int duration = 60*8; // in minuten
     //private final static String playListTitle = "LastFM History";
     private final static String playlistID = "7bqO6rEr9fQk0HnYMGDndM";
 
@@ -49,7 +49,7 @@ public class SpotifyPlaylistCreator {
         long to = from + duration*60;
 
         //Get all (top) tracks from last FM between range
-        ArrayList<Song> songs = SongFinder.getSongsInRange(lastFMuser, from-180*60, to);
+        ArrayList<Song> songs = SongFinder.getSongsInRange(lastFMuser, from-17*60*60, to);
 
 
         //Spotify authorization
@@ -130,6 +130,7 @@ public class SpotifyPlaylistCreator {
 
         //TODO: Search each track on spotify and add most relevant to playlist;
         ArrayList<String> trackUris = new ArrayList<String>();
+        ArrayList<String> notFoundTracks = new ArrayList<String>();
         for (Song s: songs) {
             System.out.println("\n=====");
 
@@ -145,7 +146,8 @@ public class SpotifyPlaylistCreator {
                 trackUris.add(uri);
 
             } catch (Exception e) {
-                System.out.println("Search Error!" + e.getMessage());
+                System.out.println("Track not found!");
+                notFoundTracks.add("\"" + s.getTitle() + "\" by " + s.getArtist());
             }
             System.out.println("=====\n");
 
@@ -157,9 +159,14 @@ public class SpotifyPlaylistCreator {
 
         try {
             addTrackToPlaylistRequest.get();
-            System.out.println("\n\n-- Playlist updated --");
+            System.out.println("\n\n-- Playlist updated --\n");
         } catch (Exception e) {
             System.out.println("Something went wrong!" + e.getMessage());
+        }
+
+        System.out.println("Following tracks were not found on spotify:");
+        for (String s: notFoundTracks) {
+            System.out.println("* "+s);
         }
 
     }
