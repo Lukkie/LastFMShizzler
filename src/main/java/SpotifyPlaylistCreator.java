@@ -30,11 +30,13 @@ public class SpotifyPlaylistCreator {
     private final static String spotifySecret = "a5d1fbda0cd24419bf8724693b4139e4";
     private final static String spotifyRedirectURI = "http://lukkietestshizzle.com/callback/";
 
-    private final static long from = 1429280607L; // Fri Apr 17 16:23:27 CEST 2015 (in seconden)
-    private final static int duration = 60*8; // in minuten
+    private final static long from = 1437816051L; // Fri Apr 17 16:23:27 CEST 2015 (in seconden)
+    //private final static int duration = 60*8; // in minuten
     //private final static String playListTitle = "LastFM History";
-    private final static String playlistID = "7bqO6rEr9fQk0HnYMGDndM";
+    private final static String playlistID = "4zhKz0eFR2MbVb3R1iyeCI";
 
+    private final static long urenOpVoorhand = 10;
+    private final static long urenErNa = 14;
 
     //TODO: Checken of song al in playlist staat
     //TODO: Album error fixen
@@ -46,10 +48,13 @@ public class SpotifyPlaylistCreator {
                 .clientSecret(spotifySecret)
                 .redirectURI(spotifyRedirectURI)
                 .build();
-        long to = from + duration*60;
+        long to = from + urenErNa*60*60;
+
 
         //Get all (top) tracks from last FM between range
-        ArrayList<Song> songs = SongFinder.getSongsInRange(lastFMuser, from-17*60*60, to);
+        ArrayList<Song> songs = SongFinder.getSongsInRange(lastFMuser, from-urenOpVoorhand*60L*60L, to);
+
+
 
 
         //Spotify authorization
@@ -65,6 +70,8 @@ public class SpotifyPlaylistCreator {
         System.out.println("Authorize at URL and return the code");
 
         Scanner sc = new Scanner(System.in);
+
+
 
         //Apply authorization
         /* Application details necessary to get an access token */
@@ -128,7 +135,7 @@ public class SpotifyPlaylistCreator {
 
 
 
-        //TODO: Search each track on spotify and add most relevant to playlist;
+        //Search each track on spotify and add them to playlist;
         ArrayList<String> trackUris = new ArrayList<String>();
         ArrayList<String> notFoundTracks = new ArrayList<String>();
         for (Song s: songs) {
