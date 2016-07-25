@@ -22,13 +22,13 @@ import java.util.Scanner;
  * Creates a playlist based on Last.FM data. Fills the playlist with all songs played in a given range.
  */
 public class SpotifyPlaylistCreator {
-    private final static String lastFMuser = "Lukkiebe";
-    private final static String lastFMkey = "3e82d0b33fd6e180f3c285337f9bbb52";
+    private final static String lastFMuser = "API user";
+    private final static String lastFMkey = "API key";
 
-    private final static String spotifyUserID = "lukkie";
-    private final static String spotifyClientID = "67c29a81a06b422e837d601bdb4380a0";
-    private final static String spotifySecret = "a5d1fbda0cd24419bf8724693b4139e4";
-    private final static String spotifyRedirectURI = "http://lukkietestshizzle.com/callback/";
+    private final static String spotifyUserID = "API key";
+    private final static String spotifyClientID = "Client ID";
+    private final static String spotifySecret = "API secret";
+    private final static String spotifyRedirectURI = "URL you entered for callback in spotify API settings";
 
     private final static long from = 1437816051L; // Fri Apr 17 16:23:27 CEST 2015 (in seconden)
     //private final static int duration = 60*8; // in minuten
