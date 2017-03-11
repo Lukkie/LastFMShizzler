@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class SongFinder {
 
-    private static String key = "3e82d0b33fd6e180f3c285337f9bbb52";
+    private static String key = "enter_key_here";
     private static String user = "Lukkiebe";
 
     private static String songByArtist = "Adana Twins";
